@@ -1,0 +1,54 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Tutorons</title>
+        <link rel='icon' href="{% static "tutorons/home/img/favicon.png" %}" />
+        <script src="//tutorons.com/static/tutorons-library.js"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function (event) {
+            var tutoronsConnection = new tutorons.TutoronsConnection(window, {
+              endpoints: {
+                  python: "{% url 'python_builtins' %}",
+              }
+            });
+            tutoronsConnection.scanDom();
+          });
+        </script>
+        <link rel='stylesheet' href="{% static "tutorons/home/css/main.css" %}" />
+    </head>
+    <body>
+        <div class='central-div'>
+            <h1 class='main-title'>Tutorons</h1>
+            <p>
+            <b>Tutorons automatically detect and explain code embedded in tutorial pages.</b>
+            They make context-relevant descriptions of the purpose and syntax of code available available from a tooltip with a single click.
+            </p>
+            <p>
+            Go ahead and see what these explanations look like.
+            Click on the highlighted code below to view automatically generated explanations.
+            </p>
+            <pre><code>[item for item in range(len(a)) if a[item] == 'bar']</code></pre>
+            <p>
+            This highlighted code was detected by Tutorons that read this page and searched for code.
+            The Tutorons then built explanations for the code and returned them to your browser, where they could be viewed in a tooltip.
+            </p>
+            <h2>Add context-relevant explanations to your tutorial</h2>
+            <p>
+            By adding Tutorons to your webpage, visitors to your page will be able to click on snippets of wget, CSS selectors, regular expressions, and Python built-ins to see automatic explanations of the code.
+            To enable Tutorons for your webpage, add the following lines to the <code>&lt;head&gt;</code> of your page.
+            </p>
+            <pre><code>&lt;script src="//tutorons.com/static/tutorons-library.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  document.addEventListener("DOMContentLoaded", function (event) {
+    var tutoronsConnection = new tutorons.TutoronsConnection(window);
+    tutoronsConnection.scanDom();
+  });
+&lt;/script&gt;
+</code></pre>
+            <p>
+            You can download the Tutorons library for local use from <a href="{% static "tutorons-library.js" %}">here</a>.
+            You can also feel free to fork the libary.  The source is <a href="https://github.com/andrewhead/tutorons-library">here</a>.
+            </p>
+        </div>
+    </body>
+</html>

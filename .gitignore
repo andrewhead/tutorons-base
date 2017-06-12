@@ -1,0 +1,17 @@
+# Dependencies
+deps/*.jar
+deps/*.ser.gz
+venv
+
+# Logging
+.*.log
+npm-debug.log
+
+# Editing
+*.swp
+
+# Build files
+*.pyc
+*.class
+workspace.xml
+db.sqlite3

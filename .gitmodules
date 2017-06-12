@@ -1,0 +1,21 @@
+[submodule "deps/wget"]
+	path = deps/wget
+	url = https://github.com/andrewhead/wget.git
+[submodule "deps/grep"]
+	path = deps/grep
+	url = https://github.com/andrewhead/grep.git
+[submodule "deps/sed"]
+	path = deps/sed
+	url = https://github.com/andrewhead/sed.git
+[submodule "deps/regexper-static"]
+	path = deps/regexper-static
+	url = https://github.com/andrewhead/regexper-static.git
+[submodule "deps/svg-server"]
+	path = deps/svg-server
+	url = https://github.com/andrewhead/regex-svg-server.git
+[submodule "tutorons/python_builtins"]
+	path = tutorons/python_builtins
+	url = https://github.com/andrewhead/Tutoron-Python-Builtins.git
+[submodule "tutorons/modules/python_builtins"]
+	path = tutorons/modules/python_builtins
+	url = https://github.com/andrewhead/Tutoron-Python-Builtins
