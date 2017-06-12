@@ -2,15 +2,29 @@
 # encoding: utf-8
 
 from __future__ import unicode_literals
-
 import os
+import logging
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 DEPS_DIR = os.path.join(BASE_DIR, 'deps')
 
-
 # Security
-
-SECRET_KEY_FILE = "/etc/django/tutorons.key"
+SECRET_KEY_FILE = os.path.join(
+    os.path.expanduser('~'),
+    '.tutorons', 'secret.key'
+)
+try:
+    SECRET_KEY = open(SECRET_KEY_FILE).read()
+except Exception as e:
+    SECRET_KEY = "placeholder"
+    logging.critical(
+        "\nException when loading secret key (" + str(e) + ")\n" +
+        "Using placeholder secret key.\nMake sure that a secret " +
+        "key file is created at the location of SECRET_KEY_FILE " + 
+        "(currently " + SECRET_KEY_FILE + ") by running:\n\n" + 
+        "DJANGO_SETTINGS_MODULE=tutorons.settings.dev python " +
+        "manage.py createsecretkey\n\n" + 
+        "If that's what you're doing right now, then kudos!\n")
 CORS_ORIGIN_ALLOW_ALL = True  # We're okay accepting connections from anywhere
 
 # Application definition

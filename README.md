@@ -58,6 +58,29 @@ have activated the virtual environment:
 source venv/bin/activate
 ```
 
+### Generate a secret key for the project
+
+The secret key needs to be instantiated for any Django
+management commands.
+
+```bash
+DJANGO_SETTINGS_MODULE=tutorons.settings.dev \
+  python manage.py createsecretkey
+```
+
+When you run this command the first time, you will see this
+output.  Don't worry, this is expected.
+
+```
+Exception when loading secret key ([Errno 2] No such file or directory: u'/Users/andrew/.tutorons/secret.key')
+Using placeholder secret key.
+Make sure that a secret key file is created at the location of SECRET_KEY_FILE (currently /Users/andrew/.tutorons/secret.key) by running:
+
+DJANGO_SETTINGS_MODULE=tutorons.settings.dev python manage.py createsecretkey
+
+If that's what you're doing right now, then kudos!
+```
+
 ### Set up the local database
 
 The Tutorons server saves all queries made to it to a local
