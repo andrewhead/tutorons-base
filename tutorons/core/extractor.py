@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 import logging
 import re
 from slimit.lexer import Lexer as JsLexer
-import bashlex
 import copy
 
 from tutorons.core.util import get_descendants
