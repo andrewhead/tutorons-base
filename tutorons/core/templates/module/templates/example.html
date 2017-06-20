@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Test for {{ app_name }} Tutoron</title>
+        <link rel='icon' href="{% static "tutorons/home/img/favicon.png" %}" />
+        <script src="//tutorons.com/static/tutorons-library.js"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function (event) {
+            var tutoronsConnection = new tutorons.TutoronsConnection(window, {
+              endpoints: {
+                  {{ app_name }}: "{% templatetag openblock %} url '{{ app_name }}' {% templatetag closeblock %}",
+              }
+            });
+            tutoronsConnection.scanDom();
+          });
+        </script>
+        <link rel='stylesheet' href="{% static "tutorons/home/css/main.css" %}" />
+    </head>
+    <body>
+        <div class='central-div'>
+            <h1 class='main-title'>A Tutoron built for {{ app_name }}</h1>
+            <p>
+            The generated Tutoron will scan this <code>&lt;code&gt;</code> block,
+            look for the token "foo", and provide a static string
+            explanation of it.  Use this as a starting point!
+            </p>
+            <pre><code>baz = foo.bar(foo.fuzz(), 2)</code></pre>
+            <p>
+            The next step is to modify the code in the <code>&lt;code&gt;</code> 
+            block above to include the code you want to explain.  Modify
+            the detection code until the code gets labeled.  Then modify your
+            explanation code until the explanation looks like how you want it.
+            </p>
+        </div>
+    </body>
+</html>

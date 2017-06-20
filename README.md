@@ -115,11 +115,70 @@ A port number can be provided as an argument to
 `rundevserver.sh` if you want to run the server on a
 different port.
 
-### More information
 
-A tutorial on developing your own Tutoron is planned.
-Though if you really need one, contact me and ask me to
-hurry up.  I can see what I can do.
+## Making your own Tutoron
+
+Let's say you're trying to make a Tutoron that provides
+just-in-time documentation for classes from the Java API.
+Start by making a directory for the new Tutoron:
+
+```bash
+mkdir tutorons/modules/java_classes
+```
+
+Then bootstrap your Tutoron coding with your Tutoron from
+some functional boilerplate by invoking the `starttutoron`
+command:
+
+```bash
+DJANGO_SETTINGS_MODULE=tutorons.settings.dev \
+  python manage.py starttutoron java_classes
+```
+
+This generates about a dozen files that have everything a
+Tutoron needs: a basic code detector, code explainer,
+templates for formatting the explanation as a tooltip, and
+even working unit tests.  All of this is written to files in
+the `tutorons/modules/java_classes` directory.
+
+Add the Tutoron as an "app" to the Django server by adding
+the following line to the list of `INSTALLED_APPS` in the
+`tutorons/settings/defaults.py` file:
+
+```python
+    'tutorons.modules.java_classes',
+```
+
+Point the Tutorons server to the URLs from the new
+Tutoron.  You can do this by adding these two URL patterns
+to the list of URL patterns in `tutorons/urls.py`:
+
+```python
+    url(r'^java_classes$', 'tutorons.modules.java_classes.views.scan', name='java_classes'),
+    url(r'^java_classes/', include('tutorons.modules.java_classes.urls', namespace='java_classes')),
+```
+
+Make sure that the new Tutoron is working by running the
+unit tests:
+
+```bash
+./runtests.sh
+```
+
+Let's see the starter Tutoron in action.  Start the server:
+
+```bash
+./rundevserver.sh
+```
+
+Then go to http://localhost:8002/java_classes/example in
+your browser.  The base Tutoron that has been created for
+you detects and explains the variable `foo` in a
+non-existent language on this page.
+
+Now you have a minimal working Tutoron.  The next step is to
+write a detector and explainer for your language.  We'll
+cover that process in a dedicated tutorial soon.
 
 ## Contributing
 
