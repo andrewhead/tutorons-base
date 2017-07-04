@@ -118,67 +118,17 @@ different port.
 
 ## Making your own Tutoron
 
-Let's say you're trying to make a Tutoron that provides
-just-in-time documentation for classes from the Java API.
-Start by making a directory for the new Tutoron:
+This framework provides straightforward extension points for
+detecting code in web pages and building tooltip-based
+contextual explanations on the web.  We encourage you to
+experiment with new Tutorons, for explaining new languages
+and creating novel types of explanations.
 
-```bash
-mkdir tutorons/modules/java_classes
-```
-
-Then bootstrap your Tutoron coding with your Tutoron from
-some functional boilerplate by invoking the `starttutoron`
-command:
-
-```bash
-DJANGO_SETTINGS_MODULE=tutorons.settings.dev \
-  python manage.py starttutoron java_classes
-```
-
-This generates about a dozen files that have everything a
-Tutoron needs: a basic code detector, code explainer,
-templates for formatting the explanation as a tooltip, and
-even working unit tests.  All of this is written to files in
-the `tutorons/modules/java_classes` directory.
-
-Add the Tutoron as an "app" to the Django server by adding
-the following line to the list of `INSTALLED_APPS` in the
-`tutorons/settings/defaults.py` file:
-
-```python
-    'tutorons.modules.java_classes',
-```
-
-Point the Tutorons server to the URLs from the new
-Tutoron.  You can do this by adding these two URL patterns
-to the list of URL patterns in `tutorons/urls.py`:
-
-```python
-    url(r'^java_classes$', 'tutorons.modules.java_classes.views.scan', name='java_classes'),
-    url(r'^java_classes/', include('tutorons.modules.java_classes.urls', namespace='java_classes')),
-```
-
-Make sure that the new Tutoron is working by running the
-unit tests:
-
-```bash
-./runtests.sh
-```
-
-Let's see the starter Tutoron in action.  Start the server:
-
-```bash
-./rundevserver.sh
-```
-
-Then go to http://localhost:8002/java_classes/example in
-your browser.  The base Tutoron that has been created for
-you detects and explains the variable `foo` in a
-non-existent language on this page.
-
-Now you have a minimal working Tutoron.  The next step is to
-write a detector and explainer for your language.  We'll
-cover that process in a dedicated tutorial soon.
+We created [this how-to guide](docs/tutorial.md) to show you
+how to build a Tutoron of your own!  The minimum viable
+Tutoron can be created with a few commands.  Following the
+full tutorial probably takes 1-2 hours and is recommended
+for anyone wanting to create and host a Tutoron.
 
 ## Contributing
 
